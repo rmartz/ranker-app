@@ -4,10 +4,8 @@ import { Topic } from './topic'
 import { TopicService } from './topic.service'
 
 @Component({
-  selector: 'my-app',
-  providers: [TopicService],
+  selector: 'app-topic-list',
   template: `
-  <h1>{{title}}</h1>
   <app-topic-detail [topic]="selectedTopic"></app-topic-detail>
   <ul class='topics'>
     <li *ngFor="let topic of topics" [class.selected]="topic === selectedTopic" (click)="onSelect(topic)">
@@ -66,14 +64,13 @@ import { TopicService } from './topic.service'
       }
   `]
 })
-export class AppComponent implements OnInit {
+export class TopicsComponent implements OnInit {
     constructor(private topicService: TopicService) { }
 
     ngOnInit(): void {
         this.getTopics();
     }
 
-    name = 'Ranker';
     topics: Topic[];
     selectedTopic: Topic;
     onSelect(topic: Topic): void {
