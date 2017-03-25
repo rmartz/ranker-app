@@ -5,7 +5,7 @@ import { Topic } from './topic'
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
+  templateUrl: 'app/dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
     constructor(private topicService: TopicService) { }

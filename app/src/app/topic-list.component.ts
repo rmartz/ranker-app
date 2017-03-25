@@ -5,15 +5,7 @@ import { TopicService } from './topic.service'
 
 @Component({
   selector: 'app-topic-list',
-  template: `
-  <app-topic-detail [topic]="selectedTopic"></app-topic-detail>
-  <ul class='topics'>
-    <li *ngFor="let topic of topics" [class.selected]="topic === selectedTopic" (click)="onSelect(topic)">
-        <span class="badge">{{topic.id}}</span>
-        {{topic.label}}
-    </li>
-  </ul>
-  `,
+  templateUrl: 'app/topic-list.component.html',
   styles: [`
       .selected {
         background-color: #CFD8DC !important;

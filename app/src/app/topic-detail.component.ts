@@ -3,16 +3,7 @@ import { Topic } from './topic'
 
 @Component({
   selector: 'app-topic-detail',
-  template: `
-  <div *ngIf="topic">
-    <h2>{{topic.label}} details!</h2>
-    <div><label>id: </label>{{topic.id}}</div>
-    <div>
-      <label>label: </label>
-      <input [(ngModel)]="topic.label" placeholder="label"/>
-    </div>
-  </div>
-`
+  templateUrl: 'app/topic-detail.component.html'
 })
 export class TopicDetailComponent {
     @Input()

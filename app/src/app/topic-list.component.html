@@ -1,0 +1,7 @@
+<app-topic-detail [topic]="selectedTopic"></app-topic-detail>
+<ul class='topics'>
+  <li *ngFor="let topic of topics" [class.selected]="topic === selectedTopic" (click)="onSelect(topic)">
+      <span class="badge">{{topic.id}}</span>
+      {{topic.label}}
+  </li>
+</ul>
