@@ -1,8 +1,11 @@
 <div *ngIf="topic">
-  <h2>{{topic.label}} details!</h2>
+  <h2>{{topic.label}}</h2>
   <div><label>id: </label>{{topic.id}}</div>
-  <div>
-    <label>label: </label>
-    <input [(ngModel)]="topic.label" placeholder="label"/>
-  </div>
+  {{topic.options}}
+  <ul *ngIf="options">
+    <li *ngFor="let option of options">
+      <span class="badge">ID: {{option.id}}</span>
+      <app-option-detail [option]="option"></app-option-detail>
+    </li>
+  </ul>
 </div>

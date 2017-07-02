@@ -6,17 +6,18 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { TopicDetailComponent } from './topic-detail.component';
-import { TopicsComponent } from './topics.component';
+import { TopicListComponent } from './topic-list.component';
 import { TopicService } from './topic.service'
+import { OptionDetailComponent } from './option-detail.component'
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      {
-        path: 'topics',
-        component: TopicsComponent
+    {
+      path: 'topics',
+      component: TopicListComponent
     },
     {
       path: 'dashboard',
@@ -32,8 +33,9 @@ import { TopicService } from './topic.service'
   declarations: [
       AppComponent,
       DashboardComponent,
-      TopicsComponent,
-      TopicDetailComponent
+      TopicListComponent,
+      TopicDetailComponent,
+      OptionDetailComponent
   ],
   providers: [
       TopicService

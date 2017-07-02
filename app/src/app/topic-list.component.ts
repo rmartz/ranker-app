@@ -56,7 +56,7 @@ import { TopicService } from './topic.service'
       }
   `]
 })
-export class TopicsComponent implements OnInit {
+export class TopicListComponent implements OnInit {
     constructor(private topicService: TopicService) { }
 
     ngOnInit(): void {
