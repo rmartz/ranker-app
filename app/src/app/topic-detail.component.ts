@@ -12,10 +12,12 @@ export class TopicDetailComponent  implements OnInit {
     constructor(private topicService: TopicService) { }
 
     ngOnInit(): void {
-        this.topicService.listTopicOptions(this.topic).then(options => this.options = options)
+        this.topicService.listTopicOptions(this.topic).subscribe(
+            options => this.options = options)
     }
+
+    options: Option[];
 
     @Input()
     topic: Topic;
-    options: Option[];
 }

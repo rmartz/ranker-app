@@ -17,15 +17,13 @@ export class TopicService {
         return this.apiService.request(
             RequestMethod.Get,
             'topics/'
-        ).map((response: Response) => {
-            console.log(response.text());
-            return response.json();
-        });
+        );
     }
 
-    listTopicOptions(topic: Topic): Promise<Option[]> {
-        return Promise.resolve(topic.options.map(function(id) {
-            return OPTIONS[id]
-        }));
+    listTopicOptions(topic: Topic): Observable<Option[]> {
+        return this.apiService.request(
+            RequestMethod.Get,
+            'topics/' + topic.id + '/options'
+        );
     }
 }

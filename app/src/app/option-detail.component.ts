@@ -3,7 +3,7 @@ import { Option } from './option'
 
 @Component({
   selector: 'app-option-detail',
-  templateUrl: 'app/topic-detail.component.html'
+  templateUrl: 'app/option-detail.component.html'
 })
 export class OptionDetailComponent {
     @Input()

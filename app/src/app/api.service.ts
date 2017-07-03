@@ -22,7 +22,7 @@ export class ApiService {
         this.token.next('11fb979804be6af7133e92917c760fb8d0c175f2');
     }
 
-    request(method: RequestMethod, uri: string): Observable<Response> {
+    request(method: RequestMethod, uri: string): Observable<any> {
         this.signIn('foo', 'bar');
 
         return this.token.mergeMap((token: String) => {
@@ -38,7 +38,10 @@ export class ApiService {
             return this.http.request(
                 this.server + uri,
                 options
-            );
+            ).map((response: Response) => {
+                console.log(response.text());
+                return response.json();
+            });
         })
     }
 }
