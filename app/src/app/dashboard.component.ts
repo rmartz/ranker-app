@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
     constructor(private topicService: TopicService) { }
 
     ngOnInit(): void {
-        this.topicService.listTopics().then(topics => this.topics = topics)
+        this.topicService.listTopics().subscribe(topics => this.topics = topics)
     }
 
     topics: Topic[];
