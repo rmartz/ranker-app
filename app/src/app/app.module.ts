@@ -10,6 +10,8 @@ import { TopicDetailComponent } from './topic-detail.component';
 import { TopicListComponent } from './topic-list.component';
 import { ContestService } from './contest.service'
 import { TopicService } from './topic.service'
+import { RankingsService } from './rankings.service'
+import { TopicOptionService } from './topicoption.service'
 import { ApiService } from './api.service'
 import { OptionDetailComponent } from './option-detail.component'
 
@@ -44,6 +46,8 @@ import { OptionDetailComponent } from './option-detail.component'
   providers: [
       ContestService,
       TopicService,
+      TopicOptionService,
+      RankingsService,
       ApiService
   ],
   bootstrap: [

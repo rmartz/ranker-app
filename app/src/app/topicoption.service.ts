@@ -10,20 +10,26 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TopicService {
+export class TopicOptionService {
     constructor(private apiService: ApiService) { }
-
-    list(): Observable<Topic[]> {
+    list(topic: Topic): Observable<Option[]> {
         return this.apiService.request(
             RequestMethod.Get,
-            'topics/'
+            'topics/' + topic.id + '/options'
         );
     }
 
-    listTopRankings(topic: Topic, count: number): Observable<Option[]> {
+    delete(topic: Topic, option: Option): Observable<Option[]> {
         return this.apiService.request(
-            RequestMethod.Get,
-            'topics/' + topic.id + '/rankings?' + count
+            RequestMethod.Delete,
+            'topics/' + topic.id + '/options/' + option.id
+        );
+    }
+
+    add(topic: Topic, option: Option): Observable<Option[]> {
+        return this.apiService.request(
+            RequestMethod.Put,
+            'topics/' + topic.id + '/options/' + option.id
         );
     }
 }

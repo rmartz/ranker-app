@@ -10,17 +10,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TopicService {
+export class RankingsService {
     constructor(private apiService: ApiService) { }
 
-    list(): Observable<Topic[]> {
-        return this.apiService.request(
-            RequestMethod.Get,
-            'topics/'
-        );
-    }
-
-    listTopRankings(topic: Topic, count: number): Observable<Option[]> {
+    top_n(topic: Topic, count: number): Observable<Option[]> {
         return this.apiService.request(
             RequestMethod.Get,
             'topics/' + topic.id + '/rankings?' + count

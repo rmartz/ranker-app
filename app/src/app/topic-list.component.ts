@@ -70,6 +70,6 @@ export class TopicListComponent implements OnInit {
     }
 
     getTopics(): void {
-        this.topicService.listTopics().subscribe(topics => this.topics = topics)
+        this.topicService.list().subscribe(topics => this.topics = topics)
     }
 }
