@@ -23,8 +23,6 @@ export class ApiService {
     }
 
     request(method: RequestMethod, uri: string): Observable<any> {
-        this.signIn('foo', 'bar');
-
         return this.token.mergeMap((token: String) => {
             console.log("Using token " + token);
             let options = new RequestOptions({

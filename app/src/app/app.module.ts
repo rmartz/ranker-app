@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { TopicDetailComponent } from './topic-detail.component';
 import { TopicListComponent } from './topic-list.component';
+import { ContestService } from './contest.service'
 import { TopicService } from './topic.service'
 import { ApiService } from './api.service'
 import { OptionDetailComponent } from './option-detail.component'
@@ -41,6 +42,7 @@ import { OptionDetailComponent } from './option-detail.component'
       OptionDetailComponent
   ],
   providers: [
+      ContestService,
       TopicService,
       ApiService
   ],
@@ -48,4 +50,8 @@ import { OptionDetailComponent } from './option-detail.component'
       AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+    constructor (private apiService: ApiService) {
+        apiService.signIn("foo", "bar");
+    }
+}
