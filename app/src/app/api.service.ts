@@ -22,22 +22,30 @@ export class ApiService {
         this.token.next('11fb979804be6af7133e92917c760fb8d0c175f2');
     }
 
-    request(method: RequestMethod, uri: string): Observable<any> {
+    request(method: RequestMethod, uri: string, payload?: {}): Observable<any> {
+        // If the user's token changes repeat the request. If we don't have any
+        // subscribers nothing will happen, if we do then they'll get updated
+        // values.
         return this.token.mergeMap((token: String) => {
             console.log("Using token " + token);
             let options = new RequestOptions({
-                method: method
-            })
-            if(token) {
-                options.headers = new Headers({
+                method: method,
+                headers: new Headers({
                     Authorization: 'Token ' + token
                 })
+            })
+            if(payload) {
+                let params = new URLSearchParams();
+                for(let param in payload) {
+                    params.append(param, payload[param]);
+                }
+                options.headers.append('Content-Type', 'application/x-www-form-urlencoded');
+                options.body = params.toString()
             }
             return this.http.request(
                 this.server + uri,
                 options
             ).map((response: Response) => {
-                console.log(response.text());
                 return response.json();
             });
         })

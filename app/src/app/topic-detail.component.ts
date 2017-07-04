@@ -19,6 +19,10 @@ export class TopicDetailComponent {
             contest => this.contest = contest)
     }
 
+    selectWinner(winner: Option) {
+        this.contestService.vote(this.topic, winner);
+    }
+
     options: Option[];
     contest: Option[];
 
