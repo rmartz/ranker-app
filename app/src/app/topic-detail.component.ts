@@ -8,10 +8,10 @@ import { Option } from './option'
   selector: 'app-topic-detail',
   templateUrl: 'app/topic-detail.component.html'
 })
-export class TopicDetailComponent  implements OnInit {
+export class TopicDetailComponent {
     constructor(private topicService: TopicService) { }
 
-    ngOnInit(): void {
+    ngOnChanges(...args: any[]) {
         this.topicService.listTopicOptions(this.topic).subscribe(
             options => this.options = options)
     }
