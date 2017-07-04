@@ -18,7 +18,9 @@ export class TopicDetailComponent {
 
     ngOnChanges(...args: any[]) {
         this.topicOptionService.list(this.topic).subscribe(
-            options => this.options = options)
+            options => this.options = options.sort((a,b) =>
+                a.label.localeCompare(b.label)
+            ))
         this.rankingsService.top_n(this.topic, 5).subscribe(
             rankings => this.top_rankings = rankings)
         this.contestService.get(this.topic).subscribe(
