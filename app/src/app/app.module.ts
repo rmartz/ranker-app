@@ -9,10 +9,12 @@ import { DashboardComponent } from './dashboard.component';
 import { TopicDetailComponent } from './topic-detail.component';
 import { TopicListComponent } from './topic-list.component';
 import { ContestService } from './contest.service'
+import { OptionService } from './option.service'
 import { TopicService } from './topic.service'
 import { RankingsService } from './rankings.service'
 import { TopicOptionService } from './topicoption.service'
 import { ApiService } from './api.service'
+import { OptionListComponent } from './option-list.component'
 import { OptionDetailComponent } from './option-detail.component'
 
 @NgModule({
@@ -24,6 +26,10 @@ import { OptionDetailComponent } from './option-detail.component'
     {
       path: 'topics',
       component: TopicListComponent
+    },
+    {
+      path: 'options',
+      component: OptionListComponent
     },
     {
       path: 'dashboard',
@@ -41,10 +47,12 @@ import { OptionDetailComponent } from './option-detail.component'
       DashboardComponent,
       TopicListComponent,
       TopicDetailComponent,
+      OptionListComponent,
       OptionDetailComponent
   ],
   providers: [
       ContestService,
+      OptionService,
       TopicService,
       TopicOptionService,
       RankingsService,
