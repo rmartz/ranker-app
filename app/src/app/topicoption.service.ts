@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TopicOptionService {
     constructor(private apiService: ApiService) { }
+
     list(topic: Topic): Observable<Option[]> {
         return this.apiService.request(
             RequestMethod.Get,

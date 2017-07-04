@@ -20,6 +20,13 @@ export class TopicService {
         );
     }
 
+    get(id: number): Observable<Topic> {
+        return this.apiService.request(
+            RequestMethod.Get,
+            'topics/' + id
+        );
+    }
+
     listTopRankings(topic: Topic, count: number): Observable<Option[]> {
         return this.apiService.request(
             RequestMethod.Get,

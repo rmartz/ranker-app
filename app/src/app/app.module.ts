@@ -24,6 +24,10 @@ import { OptionDetailComponent } from './option-detail.component'
     HttpModule,
     RouterModule.forRoot([
     {
+      path: 'topics/:id',
+      component: TopicDetailComponent
+    },
+    {
       path: 'topics',
       component: TopicListComponent
     },

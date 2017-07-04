@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 
 import { TopicService } from './topic.service'
 import { ContestService } from './contest.service'
@@ -11,12 +12,20 @@ import { Option } from './option'
   selector: 'app-topic-detail',
   templateUrl: 'app/topic-detail.component.html'
 })
-export class TopicDetailComponent {
-    constructor(private topicOptionService: TopicOptionService,
+export class TopicDetailComponent implements OnInit {
+    constructor(private route: ActivatedRoute,
+                private topicService: TopicService,
+                private topicOptionService: TopicOptionService,
                 private rankingsService: RankingsService,
                 private contestService: ContestService) { }
 
-    ngOnChanges(...args: any[]) {
+    ngOnInit() {
+        this.route.params
+            .mergeMap((params: any) => this.topicService.get(params.id)).subscribe(topic => this.updateTopic(topic));
+    }
+
+    updateTopic(topic: Topic) {
+        this.topic = topic;
         this.topicOptionService.list(this.topic).subscribe(
             options => this.options = options.sort((a,b) =>
                 a.label.localeCompare(b.label)
@@ -35,6 +44,5 @@ export class TopicDetailComponent {
     contest: Option[];
     top_rankings: Option[];
 
-    @Input()
     topic: Topic;
 }
