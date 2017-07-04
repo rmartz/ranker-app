@@ -1,7 +1,15 @@
 <div *ngIf="topic">
   <h2>{{topic.label}}</h2>
   <div><label>id: </label>{{topic.id}}</div>
-  {{topic.options}}
+
+  <h3>Contest</h3>
+  <ul *ngIf="contest">
+      <li *ngFor="let option of contest">
+          <app-option-detail [option]="option"></app-option-detail>
+      </li>
+  </ul>
+
+  <h3>Option List</h3>
   <ul *ngIf="options">
     <li *ngFor="let option of options">
       <app-option-detail [option]="option"></app-option-detail>
