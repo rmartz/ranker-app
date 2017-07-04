@@ -2,15 +2,22 @@
   <h2>{{topic.label}}</h2>
   <h3>Contest</h3>
   <ul *ngIf="contest">
-      <li *ngFor="let option of contest"><a (click)="selectWinner(option)">
-          <app-option-detail [option]="option"></app-option-detail>
-      </a></li>
+    <li *ngFor="let option of contest"><a (click)="selectWinner(option)">
+      <app-option-detail [option]="option"></app-option-detail>
+    </a></li>
   </ul>
+
+  <h3>Top Options</h3>
+  <ol *ngIf="top_rankings">
+    <li *ngFor="let option of top_rankings">
+      {{option.label}}
+    </li>
+  </ol>
 
   <h3>Option List</h3>
   <ul *ngIf="options">
     <li *ngFor="let option of options">
-        {{option.label}}
+      {{option.label}}
     </li>
   </ul>
 </div>

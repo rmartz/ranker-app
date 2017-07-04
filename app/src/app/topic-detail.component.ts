@@ -15,6 +15,8 @@ export class TopicDetailComponent {
     ngOnChanges(...args: any[]) {
         this.topicService.listTopicOptions(this.topic).subscribe(
             options => this.options = options)
+        this.topicService.listTopRankings(this.topic, 5).subscribe(
+            rankings => this.top_rankings = rankings)
         this.contestService.get(this.topic).subscribe(
             contest => this.contest = contest)
     }
@@ -25,6 +27,7 @@ export class TopicDetailComponent {
 
     options: Option[];
     contest: Option[];
+    top_rankings: Option[];
 
     @Input()
     topic: Topic;
