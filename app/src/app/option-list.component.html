@@ -1,6 +1,6 @@
-<app-option-detail *ngIf="selectedOption" [option]="selectedOption"></app-option-detail>
 <ul class='options'>
   <li *ngFor="let option of options" [class.selected]="option === selectedOption" (click)="onSelect(option)">
       {{option.label}}
+      <app-option-detail *ngIf="option == selectedOption" [option]="option"></app-option-detail>
   </li>
 </ul>

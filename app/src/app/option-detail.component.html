@@ -1,3 +1,8 @@
 <div *ngIf="option">
-  <h2>{{option.label}}</h2>
+    <hr />
+    <h1>{{option.label}}</h1>
+    <input #name type="text" value="{{option.label}}" (keyup.enter)="updateName(name.value)">
+    <hr />
+    <button (click)="confirmDelete()">Delete?</button>
+    <hr />
 </div>

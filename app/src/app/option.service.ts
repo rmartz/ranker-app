@@ -17,4 +17,12 @@ export class OptionService {
             'options/'
         );
     }
+
+    update(option: Option, params: any): Observable<any> {
+        return this.apiService.request(
+            RequestMethod.Post,
+            'options/' + option.id,
+            params
+        ).first()
+    }
 }

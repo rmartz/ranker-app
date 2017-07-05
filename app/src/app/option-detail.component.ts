@@ -1,3 +1,5 @@
+import { OptionService } from './option.service'
+
 import { Component, Input } from '@angular/core';
 import { Option } from './option'
 
@@ -8,4 +10,13 @@ import { Option } from './option'
 export class OptionDetailComponent {
     @Input()
     option: Option;
+
+    constructor(private optionService: OptionService) { }
+
+    updateName(name: string) {
+        console.log("Updating name to '" + name + "'")
+        this.optionService
+            .update(this.option, {'label': name})
+            .subscribe(() => this.option.label = name)
+    }
 }
