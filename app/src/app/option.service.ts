@@ -25,4 +25,11 @@ export class OptionService {
             params
         ).first()
     }
+
+    delete(option: Option): Observable<any> {
+        return this.apiService.request(
+            RequestMethod.Delete,
+            'options/' + option.id,
+        ).first()
+    }
 }

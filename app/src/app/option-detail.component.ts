@@ -11,6 +11,8 @@ export class OptionDetailComponent {
     @Input()
     option: Option;
 
+    confirmingDelete: boolean
+
     constructor(private optionService: OptionService) { }
 
     updateName(name: string) {
@@ -18,5 +20,11 @@ export class OptionDetailComponent {
         this.optionService
             .update(this.option, {'label': name})
             .subscribe(() => this.option.label = name)
+    }
+
+    delete() {
+        this.optionService
+            .delete(this.option)
+            .subscribe(() => this.option = null)
     }
 }

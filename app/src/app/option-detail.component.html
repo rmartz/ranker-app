@@ -3,6 +3,13 @@
     <h1>{{option.label}}</h1>
     <input #name type="text" value="{{option.label}}" (keyup.enter)="updateName(name.value)">
     <hr />
-    <button (click)="confirmDelete()">Delete?</button>
+    <div [hidden]="confirmingDelete">
+        <button (click)="confirmingDelete = true">Delete?</button>
+    </div>
+    <div [hidden]="!confirmingDelete">
+        Are you sure?
+        <button (click)="delete()">Yes</button>
+        <button (click)="confirmingDelete = false">Cancel</button>
+    </div>
     <hr />
 </div>
