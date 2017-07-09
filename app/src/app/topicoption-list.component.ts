@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable';
 
 import { Topic } from './topic'
@@ -17,6 +17,7 @@ import 'rxjs/add/observable/zip';
 })
 export class TopicOptionListComponent implements OnInit {
     constructor(private route: ActivatedRoute,
+                private router: Router,
                 private optionService: OptionService,
                 private topicService: TopicService,
                 private topicOptionService: TopicOptionService) { }
@@ -54,6 +55,17 @@ export class TopicOptionListComponent implements OnInit {
 
     toggleOption(option: Option) {
         let target = !this.enabledOptions[option.id]
-        this.topicOptionService.set(this.topic, option, target).subscribe()
+        this.topicOptionService.set(this.topic, option, target)
+            .subscribe(() => this.enabledOptions[option.id] = target)
+    }
+
+    updateName(name: string) {
+        console.log("Updating name to '" + name + "'")
+        this.topicService.update(this.topic, {'label': name}).subscribe()
+    }
+
+    delete() {
+        this.topicService.delete(this.topic)
+            .subscribe(() => this.router.navigate(['topics']))
     }
 }

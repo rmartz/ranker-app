@@ -1,19 +1,8 @@
 <div *ngIf="topic">
-  <h2>{{topic.label}}</h2>
-  <input #name type="text" value="{{topic.label}}" (keyup.enter)="updateName(name.value)">
-  <button (click)="updateName(name.value)">Rename</button>
-
-  <div [hidden]="confirmingDelete">
-      <button (click)="confirmingDelete = true">Delete?</button>
-  </div>
-  <div [hidden]="!confirmingDelete">
-      <hr />
-      Are you sure?
-      <button (click)="delete()">Yes</button>
-      <button (click)="confirmingDelete = false">Cancel</button>
-      <hr />
-  </div>
-
+  <h2 class="inline">{{topic.label}}</h2>
+  <a [routerLink]="['/topics', topic.id, 'options']">Edit</a>
+  <br />
+ 
   <div *ngIf="contest">
     <h3>Contest</h3>
     <ul class="contest">
@@ -30,7 +19,7 @@
     </li>
   </ol>
 
-  <h3>Option List</h3> <a [routerLink]="['/topics', topic.id, 'options']">Edit</a>
+  <h3>Option List</h3>
   <ul *ngIf="options">
     <li *ngFor="let option of options">
       {{option.label}}

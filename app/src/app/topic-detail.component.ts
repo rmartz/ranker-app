@@ -24,7 +24,7 @@ export class TopicDetailComponent implements OnInit {
         this.route.params
             .mergeMap((params: any) => this.topicService.get(params.id))
             .subscribe(topic => this.updateTopic(topic),
-                       () => this.toList()
+                       () => this.router.navigate(['topics'])
         );
     }
 
@@ -39,19 +39,6 @@ export class TopicDetailComponent implements OnInit {
         this.contestService.get(this.topic).subscribe(
             contest => this.contest = contest,
             () => this.contest = null)
-    }
-
-    toList() {
-        this.router.navigate(['topics']);
-    }
-
-    updateName(name: string) {
-        console.log("Updating name to '" + name + "'")
-        this.topicService.update(this.topic, {'label': name}).subscribe()
-    }
-
-    delete() {
-        this.topicService.delete(this.topic).subscribe(() => this.toList())
     }
 
     selectWinner(winner: Option) {

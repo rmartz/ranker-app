@@ -1,8 +1,28 @@
 <div *ngIf="topic">
-    <h2>{{topic.label}}</h2>
+    <h2 class="inline">{{topic.label}}</h2>
+    <a [routerLink]="['/topics', topic.id]">Back</a>
+    <br />
 
+    <input #name type="text" value="{{topic.label}}" (keyup.enter)="updateName(name.value)">
+    <button (click)="updateName(name.value)">Rename</button>
+
+    <div [hidden]="confirmingDelete">
+        <button (click)="confirmingDelete = true">Delete?</button>
+    </div>
+    <div [hidden]="!confirmingDelete">
+        <hr />
+        Are you sure?
+        <button (click)="delete()">Yes</button>
+        <button (click)="confirmingDelete = false">Cancel</button>
+        <hr />
+    </div>
+
+    <h3>Options</h3>
+    <label>
+      <input type="checkbox" [(ngModel)]="showAll" checked>Show all options
+    </label>
     <ul class='options'>
-      <li *ngFor="let option of options">
+      <li *ngFor="let option of options" [hidden]="!showAll && !enabledOptions[option.id]">
         <label>
           <input type="checkbox" [checked]="enabledOptions[option.id]" (change)="toggleOption(option)">
           {{option.label}}
