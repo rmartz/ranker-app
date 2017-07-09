@@ -38,9 +38,7 @@ export class TopicDetailComponent implements OnInit {
 
     updateName(name: string) {
         console.log("Updating name to '" + name + "'")
-        this.topicService
-            .update(this.topic, {'label': name})
-            .subscribe(() => this.topic.label = name)
+        this.topicService.update(this.topic, {'label': name})
     }
 
 
