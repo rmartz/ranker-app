@@ -16,17 +16,7 @@ export class TopicListComponent implements OnInit {
 
     topics: Topic[];
 
-    creatingTopic: boolean;
-    @ViewChild('name') input: any;
-
     getTopics(): void {
         this.topicService.list().subscribe(topics => this.topics = topics)
-    }
-
-    createTopic(name: string): void {
-        this.topicService.create(name).subscribe(() => {
-            this.creatingTopic = false;
-            this.input.nativeElement.value = '';
-        });
     }
 }

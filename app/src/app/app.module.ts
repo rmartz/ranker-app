@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { TopicDetailComponent } from './topic-detail.component';
 import { TopicListComponent } from './topic-list.component';
+import { TopicCreateComponent} from './topic-create.component';
 import { ContestService } from './contest.service'
 import { OptionService } from './option.service'
 import { TopicService } from './topic.service'
@@ -51,6 +52,7 @@ import { OptionDetailComponent } from './option-detail.component'
       DashboardComponent,
       TopicListComponent,
       TopicDetailComponent,
+      TopicCreateComponent,
       OptionListComponent,
       OptionDetailComponent
   ],

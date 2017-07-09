@@ -1,11 +1,4 @@
-<div [hidden]="creatingTopic">
-    <button (click)="creatingTopic = true">Create....</button>
-</div>
-<div [hidden]="!creatingTopic">
-    <input #name type="text" value="" (keyup.enter)="createTopic(name.value)">
-    <button (click)="createTopic(name.value)">Create</button>
-    <button (click)="creatingTopic = false">Cancel</button>
-</div>
+<app-topic-create></app-topic-create>
 
 <ul class='topics'>
   <li *ngFor="let topic of topics">
