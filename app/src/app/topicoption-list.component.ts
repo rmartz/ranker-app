@@ -51,4 +51,9 @@ export class TopicOptionListComponent implements OnInit {
             this.enabledOptions[option.id] = true;
         }
     }
+
+    toggleOption(option: Option) {
+        let target = !this.enabledOptions[option.id]
+        this.topicOptionService.set(this.topic, option, target).subscribe()
+    }
 }

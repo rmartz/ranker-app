@@ -33,4 +33,12 @@ export class TopicOptionService {
             'topics/' + topic.id + '/options/' + option.id
         );
     }
+
+    set(topic: Topic, option: Option, target: boolean): Observable<Option[]> {
+        if(target) {
+            return this.add(topic, option)
+        } else {
+            return this.delete(topic, option);
+        }
+    }
 }

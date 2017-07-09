@@ -1,10 +1,12 @@
-<app-option-create></app-option-create>
+<div *ngIf="topic">
+    <h2>{{topic.label}}</h2>
 
-<ul class='options'>
-  <li *ngFor="let option of options">
-    <label>
-      <input type="checkbox" [checked]="enabledOptions[option.id]">
-      {{option.label}}
-    </label>
-  </li>
-</ul>
+    <ul class='options'>
+      <li *ngFor="let option of options">
+        <label>
+          <input type="checkbox" [checked]="enabledOptions[option.id]" (change)="toggleOption(option)">
+          {{option.label}}
+        </label>
+      </li>
+    </ul>
+</div>
