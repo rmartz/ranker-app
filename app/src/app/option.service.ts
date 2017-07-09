@@ -32,4 +32,12 @@ export class OptionService {
             'options/' + option.id,
         ).first()
     }
+
+    create(name: string): Observable<Option> {
+        return this.apiService.request(
+            RequestMethod.Post,
+            'options/',
+            {'label': name}
+        ).first()
+    }
 }

@@ -17,6 +17,7 @@ import { TopicOptionService } from './topicoption.service'
 import { ApiService } from './api.service'
 import { OptionListComponent } from './option-list.component'
 import { OptionDetailComponent } from './option-detail.component'
+import { OptionCreateComponent} from './option-create.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { OptionDetailComponent } from './option-detail.component'
       TopicDetailComponent,
       TopicCreateComponent,
       OptionListComponent,
-      OptionDetailComponent
+      OptionDetailComponent,
+      OptionCreateComponent
   ],
   providers: [
       ContestService,

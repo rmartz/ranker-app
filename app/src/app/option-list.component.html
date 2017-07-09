@@ -1,3 +1,5 @@
+<app-option-create></app-option-create>
+
 <ul class='options'>
   <li *ngFor="let option of options" [class.selected]="option === selectedOption" (click)="onSelect(option)">
       {{option.label}}
