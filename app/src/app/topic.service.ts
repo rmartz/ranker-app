@@ -53,8 +53,6 @@ export class TopicService {
             {'label': name}
         ).first()
         observable.subscribe((response) => {
-            console.log(response)
-            // Ping so any subscribers know a new contest is available
             console.log("New topic created, notifying list to refresh");
             this._list.next(null)
         });
@@ -68,8 +66,6 @@ export class TopicService {
             params
         ).first()
         observable.subscribe((response) => {
-            console.log(response)
-            // Ping so any subscribers know a new contest is available
             console.log("Topic updated, notifying subscriptions to refresh");
             this._list.next(null);
             this._topics[topic.id].next(null);
