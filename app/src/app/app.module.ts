@@ -14,6 +14,7 @@ import { OptionService } from './option.service'
 import { TopicService } from './topic.service'
 import { RankingsService } from './rankings.service'
 import { TopicOptionService } from './topicoption.service'
+import { TopicOptionListComponent } from './topicoption-list.component'
 import { ApiService } from './api.service'
 import { OptionListComponent } from './option-list.component'
 import { OptionDetailComponent } from './option-detail.component'
@@ -25,6 +26,10 @@ import { OptionCreateComponent} from './option-create.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
+    {
+      path: 'topics/:id/options',
+      component: TopicOptionListComponent
+    },
     {
       path: 'topics/:id',
       component: TopicDetailComponent
@@ -56,7 +61,8 @@ import { OptionCreateComponent} from './option-create.component';
       TopicCreateComponent,
       OptionListComponent,
       OptionDetailComponent,
-      OptionCreateComponent
+      OptionCreateComponent,
+      TopicOptionListComponent
   ],
   providers: [
       ContestService,
