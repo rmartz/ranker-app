@@ -1,0 +1,8 @@
+<div [hidden]="creating">
+    <button (click)="creating = true">Create....</button>
+</div>
+<div [hidden]="!creating">
+    <input #name type="text" value="" (keyup.enter)="create(name.value)">
+    <button (click)="create(name.value)">Create</button>
+    <button (click)="creating = false">Cancel</button>
+</div>
