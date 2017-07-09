@@ -19,12 +19,12 @@ export class OptionDetailComponent {
         console.log("Updating name to '" + name + "'")
         this.optionService
             .update(this.option, {'label': name})
-            .subscribe(() => this.option.label = name)
+            .subscribe()
     }
 
     delete() {
         this.optionService
             .delete(this.option)
-            .subscribe(() => this.option = null)
+            .subscribe()
     }
 }
