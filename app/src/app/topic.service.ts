@@ -47,42 +47,36 @@ export class TopicService {
     }
 
     create(name: string): Observable<Topic> {
-        let observable = this.apiService.request(
+        return this.apiService.request(
             RequestMethod.Post,
             'topics/',
             {'label': name}
-        ).first()
-        observable.subscribe((response) => {
+        ).first().do((response) => {
             console.log("New topic created, notifying list to refresh");
             this._list.next(null)
         });
-        return observable;
     }
 
     update(topic: Topic, params: any): Observable<any> {
-        let observable = this.apiService.request(
+        return this.apiService.request(
             RequestMethod.Post,
             'topics/' + topic.id,
             params
-        ).first()
-        observable.subscribe((response) => {
+        ).first().do((response) => {
             console.log("Topic updated, notifying subscriptions to refresh");
             this._list.next(null);
             this._topics[topic.id].next(null);
         });
-        return observable;
     }
 
     delete(topic: Topic): Observable<any> {
-        let observable = this.apiService.request(
+        return this.apiService.request(
             RequestMethod.Delete,
             'topics/' + topic.id
-        ).first()
-        observable.subscribe((response) => {
+        ).first().do((response) => {
             console.log("Topic deleted, notifying subscriptions to refresh");
             this._list.next(null);
         });
-        return observable;
     }
 
     listTopRankings(topic: Topic, count: number): Observable<Option[]> {
