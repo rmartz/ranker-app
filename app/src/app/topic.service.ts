@@ -73,6 +73,18 @@ export class TopicService {
         return observable;
     }
 
+    delete(topic: Topic): Observable<any> {
+        let observable = this.apiService.request(
+            RequestMethod.Delete,
+            'topics/' + topic.id
+        ).first()
+        observable.subscribe((response) => {
+            console.log("Topic deleted, notifying subscriptions to refresh");
+            this._list.next(null);
+        });
+        return observable;
+    }
+
     listTopRankings(topic: Topic, count: number): Observable<Option[]> {
         return this.apiService.request(
             RequestMethod.Get,

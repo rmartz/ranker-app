@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 import { TopicService } from './topic.service'
 import { ContestService } from './contest.service'
@@ -14,6 +14,7 @@ import { Option } from './option'
 })
 export class TopicDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
+                private router: Router,
                 private topicService: TopicService,
                 private topicOptionService: TopicOptionService,
                 private rankingsService: RankingsService,
@@ -21,7 +22,10 @@ export class TopicDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.params
-            .mergeMap((params: any) => this.topicService.get(params.id)).subscribe(topic => this.updateTopic(topic));
+            .mergeMap((params: any) => this.topicService.get(params.id))
+            .subscribe(topic => this.updateTopic(topic),
+                       () => this.toList()
+        );
     }
 
     updateTopic(topic: Topic) {
@@ -36,11 +40,18 @@ export class TopicDetailComponent implements OnInit {
             contest => this.contest = contest)
     }
 
+    toList() {
+        this.router.navigate(['topics']);
+    }
+
     updateName(name: string) {
         console.log("Updating name to '" + name + "'")
         this.topicService.update(this.topic, {'label': name})
     }
 
+    delete() {
+        this.topicService.delete(this.topic).subscribe(() => this.toList())
+    }
 
     selectWinner(winner: Option) {
         this.contestService.vote(this.topic, winner);
