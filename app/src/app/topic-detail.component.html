@@ -1,5 +1,6 @@
 <div *ngIf="topic">
   <h2>{{topic.label}}</h2>
+  <input #name type="text" value="{{topic.label}}" (keyup.enter)="updateName(name.value)">
   <h3>Contest</h3>
   <ul *ngIf="contest" class="contest">
     <li *ngFor="let option of contest" (click)="selectWinner(option)">

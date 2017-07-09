@@ -36,6 +36,14 @@ export class TopicDetailComponent implements OnInit {
             contest => this.contest = contest)
     }
 
+    updateName(name: string) {
+        console.log("Updating name to '" + name + "'")
+        this.topicService
+            .update(this.topic, {'label': name})
+            .subscribe(() => this.topic.label = name)
+    }
+
+
     selectWinner(winner: Option) {
         this.contestService.vote(this.topic, winner);
     }

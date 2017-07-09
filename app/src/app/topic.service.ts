@@ -27,6 +27,14 @@ export class TopicService {
         );
     }
 
+    update(topic: Topic, params: any): Observable<any> {
+        return this.apiService.request(
+            RequestMethod.Post,
+            'topics/' + topic.id,
+            params
+        ).first()
+    }
+
     listTopRankings(topic: Topic, count: number): Observable<Option[]> {
         return this.apiService.request(
             RequestMethod.Get,
