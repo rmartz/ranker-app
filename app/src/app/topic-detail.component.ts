@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { TopicService } from './topic.service'
 import { ContestService } from './contest.service'
 import { RankingsService } from './rankings.service'
-import { TopicOptionService } from './topicoption.service'
 import { Topic } from './topic'
 import { Option } from './option'
 
@@ -16,7 +15,6 @@ export class TopicDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private topicService: TopicService,
-                private topicOptionService: TopicOptionService,
                 private rankingsService: RankingsService,
                 private contestService: ContestService) { }
 
@@ -30,10 +28,6 @@ export class TopicDetailComponent implements OnInit {
 
     updateTopic(topic: Topic) {
         this.topic = topic;
-        this.topicOptionService.list(this.topic).subscribe(
-            options => this.options = options.sort((a,b) =>
-                a.label.localeCompare(b.label)
-            ))
         this.rankingsService.top_n(this.topic, 5).subscribe(
             rankings => this.top_rankings = rankings)
         this.contestService.get(this.topic).subscribe(
@@ -45,7 +39,6 @@ export class TopicDetailComponent implements OnInit {
         this.contestService.vote(this.topic, winner);
     }
 
-    options: Option[];
     contest: Option[];
     top_rankings: Option[];
 
