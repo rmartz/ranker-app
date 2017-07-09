@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Topic } from './topic'
 import { TopicService } from './topic.service'
@@ -16,7 +16,17 @@ export class TopicListComponent implements OnInit {
 
     topics: Topic[];
 
+    creatingTopic: boolean;
+    @ViewChild('name') input: any;
+
     getTopics(): void {
         this.topicService.list().subscribe(topics => this.topics = topics)
+    }
+
+    createTopic(name: string): void {
+        this.topicService.create(name).subscribe(() => {
+            this.creatingTopic = false;
+            this.input.nativeElement.value = '';
+        });
     }
 }

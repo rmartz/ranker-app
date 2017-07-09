@@ -27,6 +27,14 @@ export class TopicService {
         );
     }
 
+    create(name: string): Observable<Topic> {
+        return this.apiService.request(
+            RequestMethod.Post,
+            'topics/',
+            {'label': name}
+        ).first()
+    }
+
     update(topic: Topic, params: any): Observable<any> {
         return this.apiService.request(
             RequestMethod.Post,

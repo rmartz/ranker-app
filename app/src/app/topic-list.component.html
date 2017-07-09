@@ -1,3 +1,12 @@
+<div [hidden]="creatingTopic">
+    <button (click)="creatingTopic = true">Create....</button>
+</div>
+<div [hidden]="!creatingTopic">
+    <input #name type="text" value="" (keyup.enter)="createTopic(name.value)">
+    <button (click)="createTopic(name.value)">Create</button>
+    <button (click)="creatingTopic = false">Cancel</button>
+</div>
+
 <ul class='topics'>
   <li *ngFor="let topic of topics">
       <a [routerLink]="['/topics', topic.id]">{{topic.label}}</a>
