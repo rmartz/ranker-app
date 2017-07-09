@@ -1,8 +1,8 @@
 <div *ngIf="topic">
   <h2 class="inline">{{topic.label}}</h2>
-  <a [routerLink]="['/topics', topic.id, 'options']">Edit</a>
+  <a [routerLink]="['/topics', topic.id, 'edit']">Edit</a>
   <br />
- 
+
   <div *ngIf="contest">
     <h3>Contest</h3>
     <ul class="contest">

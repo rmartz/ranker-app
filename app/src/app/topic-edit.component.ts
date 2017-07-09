@@ -12,10 +12,10 @@ import { TopicOptionService } from './topicoption.service'
 import 'rxjs/add/observable/zip';
 
 @Component({
-  selector: 'app-topicoption-list',
-  templateUrl: 'app/topicoption-list.component.html',
+  selector: 'app-topic-edit',
+  templateUrl: 'app/topic-edit.component.html',
 })
-export class TopicOptionListComponent implements OnInit {
+export class TopicEditComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private optionService: OptionService,

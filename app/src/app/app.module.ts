@@ -14,7 +14,7 @@ import { OptionService } from './option.service'
 import { TopicService } from './topic.service'
 import { RankingsService } from './rankings.service'
 import { TopicOptionService } from './topicoption.service'
-import { TopicOptionListComponent } from './topicoption-list.component'
+import { TopicEditComponent } from './topic-edit.component'
 import { ApiService } from './api.service'
 import { OptionListComponent } from './option-list.component'
 import { OptionDetailComponent } from './option-detail.component'
@@ -27,8 +27,8 @@ import { OptionCreateComponent} from './option-create.component';
     HttpModule,
     RouterModule.forRoot([
     {
-      path: 'topics/:id/options',
-      component: TopicOptionListComponent
+      path: 'topics/:id/edit',
+      component: TopicEditComponent
     },
     {
       path: 'topics/:id',
@@ -62,7 +62,7 @@ import { OptionCreateComponent} from './option-create.component';
       OptionListComponent,
       OptionDetailComponent,
       OptionCreateComponent,
-      TopicOptionListComponent
+      TopicEditComponent
   ],
   providers: [
       ContestService,
