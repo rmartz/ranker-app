@@ -14,12 +14,14 @@
       <hr />
   </div>
 
-  <h3>Contest</h3>
-  <ul *ngIf="contest" class="contest">
-    <li *ngFor="let option of contest" (click)="selectWinner(option)">
-      {{option.label}}
-    </li>
-  </ul>
+  <div *ngIf="contest">
+    <h3>Contest</h3>
+    <ul class="contest">
+      <li *ngFor="let option of contest" (click)="selectWinner(option)">
+        {{option.label}}
+      </li>
+    </ul>
+  </div>
 
   <h3>Top Options</h3>
   <ol *ngIf="top_rankings">

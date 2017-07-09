@@ -37,7 +37,8 @@ export class TopicDetailComponent implements OnInit {
         this.rankingsService.top_n(this.topic, 5).subscribe(
             rankings => this.top_rankings = rankings)
         this.contestService.get(this.topic).subscribe(
-            contest => this.contest = contest)
+            contest => this.contest = contest,
+            () => this.contest = null)
     }
 
     toList() {
