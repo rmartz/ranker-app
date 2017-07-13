@@ -19,4 +19,14 @@ export class OptionCreateComponent {
             this.input.nativeElement.value = '';
         });
     }
+
+    showCreate() {
+        this.creating = true;
+        // Use setTimeout so focus is given after the element is un-hidden
+        setTimeout(() => { this.input.nativeElement.focus() });
+    }
+
+    hideCreate() {
+        this.creating = false;
+    }
 }
