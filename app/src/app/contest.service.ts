@@ -4,7 +4,7 @@ import { Option } from './option'
 import { RequestMethod, Response } from '@angular/http';
 import { ApiService } from './api.service'
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -13,25 +13,25 @@ import 'rxjs/add/operator/first';
 @Injectable()
 export class ContestService {
     constructor(private apiService: ApiService) {
-        this._topics = {};
+        this._subscriptions = {};
     }
 
-    _topics: {}
+    _subscriptions: {}
 
     get(topic: Topic): Observable<Option[]> {
-        if(!this._topics[topic.id]) {
+        if(!this._subscriptions[topic.id]) {
             console.log("Creaing subscription for topic " + topic.id + " contests");
-            this._topics[topic.id] = new BehaviorSubject(null);
+            let subscription = new Subject();
+            this._subscriptions[topic.id] = subscription
+
+            this.apiService.request(
+                    RequestMethod.Get,
+                    'topics/' + topic.id + '/contests'
+                ).subscribe((response) =>
+                    subscription.next(response))
         }
-        let subscription = this._topics[topic.id].mergeMap(() => {
-            console.log("Loading contest for " + topic.id)
-            return this.apiService.request(
-                RequestMethod.Get,
-                'topics/' + topic.id + '/contests'
-            );
-        });
-        this._topics[topic.id].next()
-        return subscription;
+
+        return this._subscriptions[topic.id];
     }
 
     vote(topic: Topic, winner: Option) {
@@ -41,11 +41,13 @@ export class ContestService {
             'topics/' + topic.id + '/contests',
             {'winner': winner.id}
             // Since we're changing state unsubscribe after the first response.
-        ).first().subscribe((response) => {
-            console.log(response)
-            // Ping so any subscribers know a new contest is available
-            console.log("Notifying to request for another contest");
-            this._topics[topic.id].next()
-        });
+        ).first().subscribe(() => {
+            console.log("Fetching new contest for listeners")
+            this.apiService.request(
+                    RequestMethod.Get,
+                    'topics/' + topic.id + '/contests'
+                ).subscribe((response) =>
+                    this._subscriptions[topic.id].next(response))
+            });
     }
 }
