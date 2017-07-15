@@ -50,4 +50,19 @@ export class ContestService {
                     this._subscriptions[topic.id].next(response))
             });
     }
+
+    skip(topic: Topic) {
+        console.log("Skipping current contest");
+        return this.apiService.request(
+            RequestMethod.Delete,
+            'topics/' + topic.id + '/contests'
+            // Since we're changing state unsubscribe after the first response.
+        ).first().subscribe(() => {
+            this.apiService.request(
+                    RequestMethod.Get,
+                    'topics/' + topic.id + '/contests'
+                ).subscribe((response) =>
+                    this._subscriptions[topic.id].next(response))
+            });
+    }
 }

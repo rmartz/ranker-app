@@ -39,6 +39,10 @@ export class TopicDetailComponent implements OnInit {
         this.contestService.vote(this.topic, winner);
     }
 
+    skipContest() {
+        this.contestService.skip(this.topic);
+    }
+
     contest: Option[];
     top_rankings: Option[];
 
