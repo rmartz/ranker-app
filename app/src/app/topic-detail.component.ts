@@ -27,6 +27,10 @@ export class TopicDetailComponent implements OnInit {
     }
 
     updateTopic(topic: Topic) {
+        if(!topic.id) {
+            return;
+        }
+
         this.topic = topic;
         this.rankingsService.top_n(this.topic, 5).subscribe(
             rankings => this.top_rankings = rankings)

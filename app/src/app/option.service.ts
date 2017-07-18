@@ -10,21 +10,19 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OptionService {
-    constructor(private apiService: ApiService) {
-        this._list = new BehaviorSubject(null);
-    }
+    constructor(private apiService: ApiService) { }
 
-    _list: BehaviorSubject<null>;
+    _list: BehaviorSubject<Option[]>;
 
     list(): Observable<Option[]> {
-        let subscription = this._list.mergeMap(() => {
-            return this.apiService.request(
+        if(!this._list) {
+            this._list = new BehaviorSubject([]);
+            this.apiService.request(
                 RequestMethod.Get,
                 'options/'
-            );
-        });
-        this._list.next(null)
-        return subscription;
+            ).subscribe((response) => this._list.next(response))
+        }
+        return this._list;
     }
 
     update(option: Option, params: any): Observable<any> {
@@ -34,7 +32,11 @@ export class OptionService {
             params
         ).first().do((response) => {
             console.log("Option updated, notifying list to refresh");
-            this._list.next(null)
+            this._list.first().subscribe((list) => {
+                let index = list.indexOf(option);
+                Object.assign(list[index], params)
+                this._list.next(list);
+            })
         });
     }
 
@@ -44,7 +46,11 @@ export class OptionService {
             'options/' + option.id,
         ).first().do((response) => {
             console.log("Option deleted, notifying list to refresh");
-            this._list.next(null)
+            this._list.first().subscribe((list) => {
+                let index = list.indexOf(option);
+                list.splice(index, 1);
+                this._list.next(list);
+            })
         });
     }
 
@@ -55,7 +61,10 @@ export class OptionService {
             {'label': name}
         ).first().do((response) => {
             console.log("New option created, notifying list to refresh");
-            this._list.next(null)
+            this._list.first().subscribe((list) => {
+                list.push(response)
+                this._list.next(list);
+            })
         });
     }
 }

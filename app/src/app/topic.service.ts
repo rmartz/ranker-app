@@ -14,36 +14,34 @@ import 'rxjs/add/operator/map';
 export class TopicService {
     constructor(private apiService: ApiService) {
         this._topics = {};
-        this._list = new BehaviorSubject(null);
+        this._list = null;
     }
 
-    _list: BehaviorSubject<null>
+    _list: BehaviorSubject<Topic[]>
     _topics: {}
 
     list(): Observable<Topic[]> {
-        let subscription = this._list.mergeMap(() => {
-            return this.apiService.request(
+        if(!this._list) {
+            this._list = new BehaviorSubject([])
+            this.apiService.request(
                 RequestMethod.Get,
                 'topics/'
-            );
-        });
-        this._list.next(null)
-        return subscription;
+            ).subscribe((response) => this._list.next(response))
+        }
+        return this._list;
     }
 
     get(id: number): Observable<Topic> {
         if(!this._topics[id]) {
             console.log("Creaing subscription for topic " + id + " data");
-            this._topics[id] = new BehaviorSubject(null);
-        }
-        let subscription = this._topics[id].mergeMap(() => {
-            return this.apiService.request(
+            this._topics[id] = new BehaviorSubject({});
+
+            this.apiService.request(
                 RequestMethod.Get,
                 'topics/' + id
-            );
-        });
-        this._topics[id].next()
-        return subscription;
+            ).subscribe((response) => this._topics[id].next(response))
+        }
+        return this._topics[id];
     }
 
     create(name: string): Observable<Topic> {
@@ -65,7 +63,11 @@ export class TopicService {
         ).first().do((response) => {
             console.log("Topic updated, notifying subscriptions to refresh");
             this._list.next(null);
-            this._topics[topic.id].next(null);
+
+            this.apiService.request(
+                RequestMethod.Get,
+                'topics/' + topic.id
+            ).subscribe((response) => this._topics[topic.id].next(response))
         });
     }
 
