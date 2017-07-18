@@ -51,7 +51,10 @@ export class TopicService {
             {'label': name}
         ).first().do((response) => {
             console.log("New topic created, notifying list to refresh");
-            this._list.next(null)
+            this._list.first().subscribe((list) => {
+                list.push(response)
+                this._list.next(list);
+            });
         });
     }
 
@@ -64,10 +67,11 @@ export class TopicService {
             console.log("Topic updated, notifying subscriptions to refresh");
             this._list.next(null);
 
-            this.apiService.request(
-                RequestMethod.Get,
-                'topics/' + topic.id
-            ).subscribe((response) => this._topics[topic.id].next(response))
+            this._list.first().subscribe((list) => {
+                let index = list.indexOf(topic);
+                list[index] = response;
+                this._list.next(list);
+            })''
         });
     }
 
@@ -77,7 +81,11 @@ export class TopicService {
             'topics/' + topic.id
         ).first().do((response) => {
             console.log("Topic deleted, notifying subscriptions to refresh");
-            this._list.next(null);
+            this._list.first().subscribe((list) => {
+                let index = list.indexOf(topic);
+                list.splice(index, 1);
+                this._list.next(list);
+            });
         });
     }
 

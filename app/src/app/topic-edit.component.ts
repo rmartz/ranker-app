@@ -33,8 +33,11 @@ export class TopicEditComponent implements OnInit {
     topic: Topic;
 
     loadOptions(topic: Topic): void {
-        this.topic = topic;
+        if(!topic.id) {
+            return;
+        }
 
+        this.topic = topic;
         Observable.zip(
             this.optionService.list(),
             this.topicOptionService.list(topic)

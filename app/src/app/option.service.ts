@@ -34,7 +34,7 @@ export class OptionService {
             console.log("Option updated, notifying list to refresh");
             this._list.first().subscribe((list) => {
                 let index = list.indexOf(option);
-                Object.assign(list[index], params)
+                list[index] = response;
                 this._list.next(list);
             })
         });
